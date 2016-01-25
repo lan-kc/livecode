@@ -40,7 +40,7 @@ answer file "Choose a file to Trash:"
 put it into tName
 switch (the platform)
  case "MacOS"
- --on OS X the Trash is ~/.Trash/ so all you need to do is rename your file to '/.Trash/fileToTrash.
+ --on OS X the Trash is ~/.Trash/ so all you need to do is rename your file to '~/.Trash/fileToTrash'.
   put tName into tNameTrash
   set the itemDel to "/"
   put "~/.Trash" into item 1 to -2 of tNameTrash
