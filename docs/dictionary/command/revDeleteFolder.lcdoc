@@ -26,9 +26,31 @@ The result: The <revDeleteFolder> <command> uses system services on each <platfo
 Description:
 Use the <revDeleteFolder> <function> to remove a <folder> from the disk.
 
-The <revDeleteFolder> <command> removes the entire <folder>, including all <file|files>, <subfolder|subfolders>, and their contents.
-
-On Mac OS and OS X systems, the <revDeleteFolder> <command> places the <folder> in the Trash.
+The <revDeleteFolder> <command> removes the entire <folder>, including all <file|files>, <subfolder|subfolders>, and their contents. Alternatively, to place a folder in the Trash or Recycle Bin use the following example.
++
++Example:
++local tName, tNameTrash
++answer folder "Choose a folder to Trash:"
++put it into tName
++switch (the platform)
++ case "MacOS"
++ --on OS X the Trash is ~/.Trash/ so all you need to do is rename your folder to '~/.Trash/folderToTrash'.
++  put tName into tNameTrash
++  set the itemDel to "/"
++  put "~/.Trash" into item 1 to -2 of tNameTrash
++  rename folder tName to tNameTrash
++ break
++ case "Win32"
++ --on Windows VBScript is required to move a folder to the Recycle Bin
++  replace "/" with "\" in tName
++  put "Const RECYCLE_BIN = &Ha&" & cr & \
++  "Set objShell = CreateObject(`Shell.Application`)" & cr & \
++  "Set recycleFolder = objShell.NameSpace(RECYCLE_BIN)" & cr & \
++  "recycleFolder.MoveHere `" & tName & "`" into tScript
++  replace "`" with quote in tScript
++  do tScript as "VBScript"
++ break
++end switch
 
 >*Warning:*  This <command> can be used to rename or move <file|files> and <folder|folders> your stack did not create. Of course, a <stack> should not rename or move <file|files> and <folder|folders> it didn't create without obtaining explicit confirmation from the user.
 
