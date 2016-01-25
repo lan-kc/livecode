@@ -1,0 +1,1 @@
+#Removed the incorrect statement that on OS X the folder is moved to the Trash. Added an example script of how to move a folder to the Trash. Added < > tags where necessary to link to other Dictionary entries.
